@@ -16,8 +16,13 @@ public class root {
 		
 		int orderid = 1;
 		
+		int salorderid = 1;
+		
 		int cId = 0;
 		int prchId = 0;
+		
+		int sprId = 0;
+		int sprchId = 0;
 		
 		
 		
@@ -25,7 +30,7 @@ public class root {
 		String repeat ="yes";
 		String categoryName;
 		
-		
+		 Map<String,salesparty> SalesPartyMap = new HashMap<>();
 		 
 		 Map<String,client> partyMap = new HashMap<>();
 		 
@@ -33,7 +38,9 @@ public class root {
 		 Map<String,prChild> prchMap = new HashMap<>();
 		 
 		 
-		
+		 Map<String,prSalesOrder> sprchMap = new HashMap<>();
+		 
+		 
 		 Map<String,category> catMap = new HashMap<>();
 		 
 		 
@@ -52,8 +59,9 @@ public class root {
 		product p1;
 		client par;
 		prChild purchaseObj;
+		prSalesOrder salespurchaseObj;
 		table tb;
-		
+		salesparty spar;
 		
 		 
 		Scanner sc = new Scanner(System.in);
@@ -514,21 +522,7 @@ public class root {
 			}
 		
 		
-		else if(ccounter == 4) {
-			
-		}
-			
-			
-		else if(ccounter ==5) {
-			
-		}
-			
-			
 		
-		else if(ccounter ==6) {
-			System.out.println("Exit 0");
-			break;
-		}
 		
 			}
 		
@@ -537,9 +531,147 @@ public class root {
 		
 	}
 		
+		else if(ccounter ==4) {
+			//for going in sales dept
+			
+			int salesOpt =0;
+			salesparty Sobj = new salesparty();
+			
+			while(salesOpt!=3) {
+				System.out.println("Select: \n 1.Sales Party \n 2.Sales Order \n 3.Exit \n");
+				salesOpt = sc.nextInt();
+				
+				if(salesOpt == 1) {
+					
+					int salespartyOpt = 0;
+					
+					while(salespartyOpt  != 5) {
+						Sobj.salesPartyOpt();
+						salespartyOpt = sc.nextInt();
+						
+						if(salespartyOpt == 1) {
+							spar = new salesparty();
+							
+							spar.setsPId("Spar-"+sprId);
+							
+							System.out.println("Enter name: \n");
+							String salespartyName = sc.next();
+							spar.setsPName(salespartyName);
+							
+							System.out.println("Enter contact Num: \n");
+							String salespartyNum = sc.next();
+							spar.setsPNum(salespartyNum);
+							
+							System.out.println("Enter Opening Account: \n");
+							String salespartyOpeningAcc = sc.next();
+							spar.setSalesopeningAccount(salespartyOpeningAcc);
+							
+							SalesPartyMap.put(spar.getsPId(), spar);
+							System.out.println("size of sales party "+SalesPartyMap.size());
+							sprId++ ;
+						}
+						
+						else if(salespartyOpt ==2) {
+							
+							Sobj.showSalesParty(SalesPartyMap);
+						}
+						
+						else if(salespartyOpt ==3) {
+							System.out.println("Enter the ID to update ");
+							String spId = sc.next();
+							Sobj = SalesPartyMap.get(spId);
+							
+							
+							System.out.println("What you want to update ? ");
+							String key = sc.next();
+							
+							System.out.println("Enter the new value: ");
+							String newVal = sc.next();
+							Sobj.updateSalesParty(spId, SalesPartyMap, newVal, key, Sobj);
+						}
+						
+						else if(salespartyOpt ==4) {
+							Sobj = new salesparty();
+							System.out.println("Enter ID to delete ");
+							String delId = sc.next();
+							Sobj.deleteSalesParty(delId,SalesPartyMap);
+						}
+						
+						else if(salespartyOpt == 5) {
+							System.out.println("Exit from sales");
+							break;
+						}
+					}
+					
+					
+				}
+				
 		
+				else if(salesOpt ==2) {
+					
+					int sel =0;
+					prSalesOrder spurObj = new prSalesOrder();
+					
+					while(sel !=3) {
+						spurObj.purchaseSalesOrderOption();
+						
+						sel=sc.nextInt();
+						
+						if(sel ==1) {
+							salespurchaseObj = new prSalesOrder();
+							salespurchaseObj.setPrId("Sales"+sprchId);
+							
+							System.out.println("Sales ID: "+salespurchaseObj.getPrId());
+							
+							salespurchaseObj.setPrNum("0000"+salorderid);
+							
+							String date = spurObj.getDate();
+							
+							salespurchaseObj.setPrdate(date);
+							
+							
+							sprchMap.put(salespurchaseObj.getPrId(),salespurchaseObj);
+							
+							System.out.println("Sales order: "+salespurchaseObj.getPrNum());
+							System.out.println("Sales order Date : "+salespurchaseObj.getPrdate());
+							
+							salorderid++;
+							sprchId++;
+							
+						}
+						
+						else if(sel ==2) {
+							//spurObj.showPurchaseOrder(prchMap);
+						}
+					}
+				}
+			
+		}
 		
 		}
-	}
+		
+			
+			
+		else if(ccounter ==5) {
+			
+			System.out.println("\n 1.Purchase Account \n 2.Sales Account");
+			break;
+		}
+			
+		
+			
+		
+		else if(ccounter ==6) {
+			System.out.println("Exit ALL");
+			break;
+		}
+		
+		
+		
+		
+		
+	}//ccounter close
 
-}
+}// main func close
+	
+}//class close

@@ -68,14 +68,19 @@ public class category {
 	}
 	
 	public boolean validateName(String cName,Map<String,category>map) {
+	
 		
+		
+	
 		
 		 if(cName.length()>3) {
+				
 			 
 			 System.out.println("Incorrect!!");
 			 return false;
-			 
+				
 		 }
+		
 		 
 		 else if(cName.length()<=3) {
 			

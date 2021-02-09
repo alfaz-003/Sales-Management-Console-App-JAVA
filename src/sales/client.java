@@ -57,7 +57,7 @@ public class client {
 	
 	 public void showParty(Map<String,client> map) {
 		   
-		   System.out.println(" |    Id     |      Name     |    Contact No.      |  |  Opening Account  | \n");
+		   System.out.println(" |    Id    |   Name   |    Contact No.  |  Opening Account  | \n");
 		  
 		   
 		   for(Map.Entry<String, client> val:map.entrySet()) {
