@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
+
 public class root {
 
 	public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class root {
 		int salorderid = 1;
 		
 		int cId = 0;
+		
 		int prchId = 0;
 		
 		int sprId = 0;
@@ -27,8 +30,14 @@ public class root {
 		
 		
 		
-		String repeat ="yes";
+		String repeat ="yesss";
+		
+		
+		
 		String categoryName;
+		
+		
+		//initializing maps
 		
 		 Map<String,salesparty> SalesPartyMap = new HashMap<>();
 		 
@@ -43,9 +52,7 @@ public class root {
 		 
 		 Map<String,category> catMap = new HashMap<>();
 		 
-		 
-		 
-		 Map<String,product> prodMap = new HashMap<>();
+
 		 
 		 
 		
@@ -53,7 +60,12 @@ public class root {
 		 String categoryId;
 		 category c1;
 		 
-		 Map<String,table> orderMap = new HashMap<>();
+		 Map<String,table> tableMap = new HashMap<>();
+		 
+		 Map<String,Map<String,table>>accountPurchaseMap = new HashMap<>();
+		 
+		 
+		 Map<String,product> prodMap = new HashMap<>();
 		 
 		
 		product p1;
@@ -67,7 +79,8 @@ public class root {
 		Scanner sc = new Scanner(System.in);
 		int count = 0;
 		
-		System.out.println("******************  SALES MANAGEMENT  ************************");
+		System.out.println("\n");
+		System.out.println("******************  SALES MANAGEMENT  ******************************************");
 		
 		System.out.println("\n");
 		
@@ -79,6 +92,7 @@ public class root {
 		while(ccounter!=6) {
 
 			System.out.println(" \n 1.Category \n 2.Product \n 3.Purchase \n 4.Sales \n 5.Account \n 6.Exit \n");
+			System.out.println("********************************************************************************");
 			ccounter = sc.nextInt();
 			
 			
@@ -417,6 +431,8 @@ public class root {
 				  select = sc.nextInt();
 				 
 				 if(select ==1 ) {
+					 while(repeat.equals("yes")) {
+					 par = new client();
 					 
 					 purchaseObj = new prChild();
 						
@@ -432,20 +448,29 @@ public class root {
 					 
 					 
 					 prchMap.put(purchaseObj.getprId(),purchaseObj);
-//					
+				//changes made
 					 
-					 orderid++;
+					 
+//					 System.out.println("PARTY LIST");
+//					 par.showParty(partyMap);
+					 
+					 
+					 
+					 
+					 
+					 
+				//	 orderid++;
 					 prchId++;
-				 }
+				
 				 
-				 else if(select ==2) {
+				
 					 
-					 while(repeat.equals("ok")) {
+					// while(repeat.equals("ok")) {
 						 p1 = new product();
 						 
 						 
 						 
-						 par = new client();
+				     par = new client();
 					 purchaseObj = new prChild();
 					 tb = new table();
 //					 
@@ -455,13 +480,14 @@ public class root {
 					 
 					 
 					 
-				//	 System.out.println("LIST "+table());
-					 
+//				// System.out.println("LIST "+table());
+//					 System.out.println("Order table");
+//					 tb.viewOrder(orderMap);
 					 
 					 
 					 System.out.println("Select a party from above table: \n");
 					 String partyId = sc.next();
-					 tb.setOrdernum(partyId);
+					 tb.settablenum("order"+(orderid-1));
 					 
 					 
 					 
@@ -488,45 +514,82 @@ public class root {
 					 tb.setDate(purchaseObj.getDate());
 					 
 					 
-					 orderMap.put(purchaseObj.getPrNum(),tb);
 					 
-					 System.out.println("Repeat  it again ? enter yes: ");
+					 if(repeat.equals("yes")) {
+							
+							boolean check = tb.checktable(tableMap,quantity,tb,price);
+							
+							if(!check) {
+								 tb.viewtable(tableMap);
+							}
+						 }
 					 
-					 repeat = sc.next();
+					 boolean val= tb.checktableid(tableMap,partyName);
+						if(!val) {
+							 orderid++;
+							 tableMap.put("order"+(orderid-1), tb);
+							 accountPurchaseMap.put("purchase"+(prchId-1), tableMap); //account purchase map
+						}
 					 
 					 
 					 
-					 
-					 tb.viewOrder(orderMap);
-					 
-					 if(!repeat.equals("yes")) {
 						 
-						 break;
+						 System.out.println("Repeat? enter yes/no: ");
 						 
-					 }
+						 repeat = sc.next();
+						
+						 if(repeat.equals("no")) {
+							 tb.viewtable(tableMap);
+						 }
+						
+						 
+						 if(!repeat.equals("yes")) {
+							 
+							 break;
+							 
+						   }
+			        	 }
+						 
+				      }
+				 
+				 
+				 	else if(select ==2) {
 					 
-					 }
+					 tb = new table();
+					 System.out.println(" Enter the Order Id to Update!! ");
+					 String orderID = sc.next();
+					// tb.updateOrder(orderID, orderMap);
+					 
 				 }
 				 
-				 else if(select ==3) {
-					 
-					 System.out.println("Exit Success!!");
-				 }
+				 	else if(select ==3) {
+						 
+						 tb = new table();
+						 System.out.println(" Enter the Order Id to Delete!! ");
+						 String orderID = sc.next();
+						// orderObj.updateOrder(orderID, orderMap);
+						 
+						
+					 }
+				 	 else if(select ==4) {
+						 System.out.println("Exit Success!!");
+						 
+					 }
+						 
+					
 				 
-				 } //while loop
+				 } //while loop end
 			}
+			
+			
+			
 			
 			else if(purchaseOpt==3) {
 				System.out.println("Exit from purchase");
 				break;
 			}
 		
-		
-		
-		
-			}
-		
-		
+		}
 		
 		
 	}
@@ -552,7 +615,7 @@ public class root {
 						if(salespartyOpt == 1) {
 							spar = new salesparty();
 							
-							spar.setsPId("Spar-"+sprId);
+							spar.setsPId("Sale-"+sprId);
 							
 							System.out.println("Enter name: \n");
 							String salespartyName = sc.next();
@@ -568,7 +631,7 @@ public class root {
 							
 							SalesPartyMap.put(spar.getsPId(), spar);
 							System.out.println("size of sales party "+SalesPartyMap.size());
-							sprId++ ;
+							sprId++ ; 
 						}
 						
 						else if(salespartyOpt ==2) {
@@ -654,7 +717,21 @@ public class root {
 			
 		else if(ccounter ==5) {
 			
+			Acc ac = new Acc();   
+			
 			System.out.println("\n 1.Purchase Account \n 2.Sales Account");
+			int ch= sc.nextInt();
+			
+			if(ch ==1) {
+				ac.purchaseFinal(tableMap);
+			}
+			else if(ch ==2) {
+				ac.salesFinal(tableMap);
+			}
+			
+			else {
+				System.out.println("Invalid Entry");
+			}
 			break;
 		}
 			

@@ -75,7 +75,6 @@ public class category {
 		
 		 if(cName.length()>3) {
 				
-			 
 			 System.out.println("Incorrect!!");
 			 return false;
 				
@@ -110,7 +109,7 @@ public class category {
 			int num1 = rand.nextInt(Ar1.length-1);
 			String s = Ar1[num1];
 			String newname = cName.concat(s);
-			System.out.println("Updated name: "+newname);
+			System.out.println("\n Updated name: "+newname);
 			return newname;
 			
 		}
