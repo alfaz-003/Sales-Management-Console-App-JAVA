@@ -27,6 +27,8 @@ public class root {
 		int sprId = 0;
 		int sprchId = 0;
 		
+		int c = 0;
+		
 		
 		
 		
@@ -120,14 +122,23 @@ public class root {
 						
 						//System.out.println("Response: "+res);
 						
-						
 						if(!res) {
+							c++;
+							System.out.println("Requirements doesn't match "+c);
 							
-							System.out.println("Not matched!!");
+							if(c==3) 
+							{
+								System.out.println("2 chances Left");
+							}
+							else if(c==7)
 							
+							{
+								res = true;
+								c=0;
+							}
 							
 						}
-						else if(res){
+						 if(res){
 							
 							String catName = c1.autoName(categoryName);
 							

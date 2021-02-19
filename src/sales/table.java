@@ -14,6 +14,8 @@ public class table {
 	
 	float price;
 	
+	float subTotal;
+	
 	int quantity;
 	
 	float total;
@@ -58,6 +60,17 @@ public class table {
 		this.quantity = quantity;
 	}
 	
+	
+	
+	public float getSubTotal() {
+		return subTotal;
+	}
+	public void setSubTotal(float subTotal) {
+		this.subTotal = subTotal;
+	}
+
+
+
 	Scanner sc = new Scanner(System.in);
 	
     public void viewtable(Map<String,table> map) {

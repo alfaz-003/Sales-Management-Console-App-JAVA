@@ -29,5 +29,20 @@ public class Acc {
 	}
 	
 	
+	
+public void purchaseFinalAccPrice(Map<String,table>purchaseMap,Map<String,client> map,String Ordernum,String partyId) {
+		
+		float orderPrice = purchaseMap.get(Ordernum).getSubTotal();
+		float openingAccount = Float.parseFloat(map.get(partyId).getOpeningAccount());
+		float amount = openingAccount-orderPrice;
+		
+		client partyObj = map.get(partyId);
+		partyObj.setOpeningAccount(String.valueOf(amount));
+		map.put(partyId, partyObj);
+		System.out.println("Opening Account Updated ");
+	
+	}
+	
+	
 
 }
